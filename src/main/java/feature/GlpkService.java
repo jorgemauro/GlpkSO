@@ -28,8 +28,8 @@ public class GlpkService {
             try {
                 // Create problem
                 lp = GLPK.glp_create_prob();
-                System.out.println("Problem created");
-                GLPK.glp_set_prob_name(lp, "Transportation 7 - Wine");
+                System.out.println("Problem criado");
+                GLPK.glp_set_prob_name(lp, "Transporte");
                 System.out.println(GLPK.glp_get_prob_name(lp));
                 // Define columns
                 GLPK.glp_add_cols(lp, numeroVariaveis); // number of variaveis
@@ -67,12 +67,12 @@ public class GlpkService {
                 GLPK.glp_init_smcp(parm);
                 ret = GLPK.glp_simplex(lp, parm);
 
-                // Retrieve solution
-                if (ret == 0) {
-                    GLPKUtil.write_lp_solucao(lp,"transportation7.sol");
-                    //GLPK.glp_write_sol(lp, "transportation7.sol");
-                } else {
-                    System.out.println("The problem could not be solved");
+                    // Retrieve solution
+                    if (ret == 0) {
+                        GLPKUtil.write_lp_solucao(lp,"transportation7.sol");
+                        //GLPK.glp_write_sol(lp, "transportation7.sol");
+                    } else {
+                    System.out.println("O problema não pode ser resolvido");
                 }
 
                 // Free memory
