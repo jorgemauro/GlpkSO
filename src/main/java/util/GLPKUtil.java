@@ -16,6 +16,7 @@ public class GLPKUtil {
             bw.newLine();
 
             for (int i = 1; i <= GLPK.glp_get_num_cols(lp); i++) {
+                if(GLPK.glp_get_col_name(lp, i).equals("x1")||GLPK.glp_get_col_name(lp, i).equals("x2"))
                 bw.write(GLPK.glp_get_col_name(lp, i) + " = " + GLPK.glp_get_col_prim(lp, i));
                 bw.newLine();
             }
