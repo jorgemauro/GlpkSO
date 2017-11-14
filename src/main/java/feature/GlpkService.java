@@ -10,12 +10,10 @@ public class GlpkService {
             SWIGTYPE_p_int ind;
             SWIGTYPE_p_double val;
             int ret;
+            Prob prob;
 
             int numeroVariaveis = 9;
             int numeroRestricoes = 6;
-            String[] variaveis = {"x11", "x12", "x13",
-                    "x21", "x22", "x23",
-                    "x31", "x32", "x33"};
             double[][] restricoes = {{-1,-1,-1,0,0,0,0,0,0},
                     {0,0,0,-1,-1,-1,0,0,0},
                     {0,0,0,0,0,0,-1,-1,-1},
@@ -24,7 +22,7 @@ public class GlpkService {
                     {0,0,1,0,0,1,0,0,1}};
             double[] limites = {-300,-500,-200,200,400,300};
             double[] coeficientes = {20,16,24,10,10,8,12,18,10};
-
+            prob=new Prob(numeroVariaveis,numeroRestricoes,restricoes,limites,coeficientes);
             try {
                 // Create problem
                 lp = GLPK.glp_create_prob();
@@ -34,18 +32,18 @@ public class GlpkService {
                 // Define columns
                 GLPK.glp_add_cols(lp, numeroVariaveis); // number of variaveis
                 for (int i = 1; i <= numeroVariaveis; i++) {
-                    GLPK.glp_set_col_name(lp, i, variaveis[i-1]);
+                    GLPK.glp_set_col_name(lp, i, prob.getVariaveis(i-1));
                     GLPK.glp_set_col_kind(lp, i, GLPKConstants.GLP_IV);
                     GLPK.glp_set_col_bnds(lp, i, GLPKConstants.GLP_LO, 0, 0);
                 }
-                ind = GLPK.new_intArray(numeroVariaveis);
-                val = GLPK.new_doubleArray(numeroVariaveis);
+                ind = GLPK.new_intArray(prob.getNumeroVariaveis());
+                val = GLPK.new_doubleArray(prob.getNumeroVariaveis());
 
                 // Create rows
-                GLPK.glp_add_rows(lp, numeroRestricoes);
+                GLPK.glp_add_rows(lp, prob.getNumeroRestricoes());
 
                 // Set row details
-                GLPKUtil.set_lo_restricoes(lp, ind, val, limites,restricoes, 1, numeroRestricoes, numeroVariaveis);
+                GLPKUtil.set_lo_restricoes(lp, ind, val, prob.getLimites(),prob.getRestricoes(), 1, prob.getNumeroRestricoes(), prob.getNumeroVariaveis());
 
                 // Free memory
                 GLPK.delete_intArray(ind);
@@ -56,8 +54,8 @@ public class GlpkService {
                 GLPK.glp_set_obj_dir(lp, GLPKConstants.GLP_MIN);
                 GLPK.glp_set_obj_coef(lp, 0, 0);
 
-                for (int i = 1; i <= numeroVariaveis; i++) {
-                    GLPK.glp_set_obj_coef(lp, i, coeficientes[i-1]);
+                for (int i = 1; i <= prob.getNumeroVariaveis(); i++) {
+                    GLPK.glp_set_obj_coef(lp, i, prob.getCoeficientes(i-1));
                 }
 
                 // Write model to file

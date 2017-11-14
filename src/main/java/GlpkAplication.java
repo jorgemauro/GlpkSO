@@ -1,5 +1,5 @@
-import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-@EnableSpringConfigured
+@EnableWebMvc
 public class GlpkAplication {
 }
