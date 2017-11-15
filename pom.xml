@@ -27,7 +27,10 @@
             <groupId>org.gnu.glpk</groupId>
             <artifactId>glpk-java</artifactId>
             <version>1.10.0</version>
-        </dependency>
+        </dependency><dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>

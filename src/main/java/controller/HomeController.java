@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.portlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @EnableAutoConfiguration
@@ -22,7 +22,7 @@ public class HomeController {
     public ModelAndView getResultado(@RequestParam("origens")int lojas,
                                      @RequestParam("destinos")int clientes,
                                      @RequestParam("oferta")int estoque,
-                                     @RequestParam("mat[][]")double[][] matriz, Model model){
+                                     @RequestParam("mat[][]")double[    ][] matriz, Model model){
         System.out.println("cheguei");
         return new ModelAndView("resultado");
     }
