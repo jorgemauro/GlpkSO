@@ -4,7 +4,7 @@ import org.gnu.glpk.*;
 import util.GLPKUtil;
 
 public class GlpkService {
-        public GlpkService() {
+        public static void main(String[] args) {
             glp_prob pLinear;
             glp_smcp parametros;
             SWIGTYPE_p_int ind;
@@ -35,8 +35,8 @@ public class GlpkService {
                     {0,1,0,0,1,0},
                     {0,0,1,0,0,1}
         };
-            double[] limites = {-500,-500,200,400,200};
-            double[] coeficientes = {2,4,2,3,4,7};
+            double[] limites = {-500,-600,100,500,500};
+            double[] coeficientes = {2,3,4,5,2,7};
             prob=new Prob(numeroVariaveis,numeroRestricoes,restricoes,limites,coeficientes);
             try {
                 // Create problem

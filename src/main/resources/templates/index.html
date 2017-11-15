@@ -14,23 +14,25 @@
         <a href="#" class="brand-logo center-align">Loja de Roupas</a>
     </div>
 </nav>
+<form method="POST">
 <div class="card topo">
     <div class="card-content row">
+
+        <a class="right-align waves-effect waves-light btn green disabled" type="submit" th:value="resultado" name="resultado" id="chamar">Calcular</a>
         <div class="input-field col s6">
-            <input placeholder="Origens" id="origens" type="number" />
+            <input placeholder="Origens" name="origens" id="origens" type="number" />
             <label for="origens"></label>
         </div>
         <div class="input-field col s6">
-            <input placeholder="Clientes" id="destinos" type="number"/>
+            <input placeholder="Clientes" name="destinos" id="destinos" type="number"/>
             <label for="destinos"></label>
         </div>
         <div class="input-field col s12">
-            <input placeholder="Oferta" id="oferta" type="number"/>
+            <input placeholder="Oferta" name="oferta" id="oferta" type="number"/>
             <label for="destinos"></label>
         </div>
         <a class="waves-effect waves-light btn blue" id="gerar">Gerar matriz de custos</a>
         <a class="waves-effect waves-light btn blue disabled" id="limpar">Limpar</a>
-        <a class="right-align waves-effect waves-light btn green disabled" type="submit" id="chamar">Calcular</a>
     </div>
 </div>
 <div class="card" >
@@ -47,8 +49,8 @@
                 </tbody>
             </table>
         </div>
-
     </div>
+</form>
     <div id="modal1" class="modal">
         <div class="modal-content">
             <p>Os campos são obrigatorios</p>
@@ -58,7 +60,7 @@
         </div>
     </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="static/js/ajustes.js" th:src="@{/js/ajustes.js}"></script>
-<script type="text/javascript" src="static/js/materialize.min.js" th:src="@{/js/materialize.min.js}"></script>
+<script type="text/javascript" src="/static/js/ajustes.js" th:src="@{js/ajustes.js}"></script>
+<script type="text/javascript" src="/static/js/materialize.min.js" th:src="@{js/materialize.min.js}"></script>
 </body>
 </html>

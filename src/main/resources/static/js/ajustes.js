@@ -49,7 +49,9 @@ $("#gerar").click(()=>{
     $('#thread').append("<tr id=\"first\"><th>Origem</th></tr>");
     $('table').append("<tbody id=\"matrix\"></tbody>");
 });
-
+$('#chamar').click((e)=>{
+    $('form').submit();
+});
 $('.modal').modal({
         dismissible: true, // Modal can be dismissed by clicking outside of the modal
         opacity: .5, // Opacity of modal background
