@@ -8,7 +8,8 @@ public class Prob {
     private double[][] restricoes;
     private double[] limites;
     private double[] coeficientes;
-    Prob(int nVar, int nRestricao,double[][] rest, double[] limit, double[] coef ){
+    private double[] resultador;
+    public Prob(int nVar, int nRestricao, double[][] rest, double[] limit, double[] coef){
         this.numeroVariaveis=nVar;
         this.numeroRestricoes=nRestricao;
         this.variaveis= new String[nVar+nRestricao];
@@ -18,6 +19,14 @@ public class Prob {
         this.restricoes=rest;
         this.limites=limit;
         this.coeficientes=coef;
+    }
+
+    public double[] getResultador() {
+        return resultador;
+    }
+
+    public void setResultador(double[] resultador) {
+        this.resultador = resultador;
     }
     public int getNumeroVariaveis() {
         return numeroVariaveis;

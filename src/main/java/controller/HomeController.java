@@ -1,6 +1,7 @@
 package controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import feature.GlpkService;
+import feature.Prob;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -8,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -50,29 +50,33 @@ public class HomeController {
         }
 
         double[] limits = new double[nRestrições];
-        double [] coef= new double[variaveis];
         int count2=1;
-        int count3=0;
         for(int i=0;i<matriz.length;i++){
             if(i==0){
                 limits[count2-1]=-matriz[clientes];
-                coef[i]=matriz[i];
                 count2++;
-                count3++;
             }else if(i==(2*clientes)+1){
                 limits[count2-1]=-matriz[(2*clientes)+1];
-                coef[i]=matriz[i];
                 count2++;
-                count3++;
-            }else if(i>(matriz.length-(clientes+2))&& i!=matriz.length-1){
+            }else if(i>(matriz.length-(clientes+1))&& i!=matriz.length-1){
                 limits[count2-1]=matriz[i];
                 count2++;
-            }else if(i!=matriz.length-1&& i!=0){
-                coef[i]=matriz[count3];
+            }
+        }
+        double [] coef= new double[variaveis];
+        int count3=0;
+
+        for(int j=0;j<matriz.length-(clientes+1);j++){
+            if(j!=(clientes+1)&&j!=(clientes*j)){
+                coef[count3]=matriz[j];
                 count3++;
             }
         }
 
+        Prob prob=new Prob(variaveis,nRestrições,matrizRestris,limits,coef);
+        GlpkService glpkService = new GlpkService();
+        prob=glpkService.serviceProb(prob);
+        System.out.println("test");
         return new ModelAndView("resultado");
     }
     public static void main(String[] args) throws Exception {
