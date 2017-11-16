@@ -6,7 +6,7 @@
     <title>Problema De transporte</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
 
-    <link rel="stylesheet" href="/static/css/ajustes.css"/>
+    <link rel="stylesheet" href="/static/css/ajustes.css" th:href="@{/css/ajustes.css}"/>
 </head>
 <body>
 <nav>
@@ -27,35 +27,35 @@
             <tbody id="matrix">
             <tr>
                 <th>resultado otimo</th>
-                <th>7800</th>
+                <th th:text="${fObj}"></th>
             </tr>
             <tr>
                 <th>caminho1</th>
-                <th>0.0</th>
+                <th th:text="${c1}"></th>
             </tr>
 
             <tr>
                 <th>caminho2</th>
-                <th>200.0</th>
+                <th th:text="${c2}"></th>
             </tr>
 
             <tr>
                 <th>caminho3</th>
-                <th>0.0</th>
+                <th th:text="${c3}"></th>
             </tr>
 
             <tr>
                 <th>caminho4</th>
-                <th>500.0</th>
+                <th th:text="${c4}"></th>
             </tr>
 
             <tr>
                 <th>caminho5</th>
-                <th>0.0</th>
+                <th th:text="${c5}"></th>
             </tr>
             <tr>
                 <th>caminho6</th>
-                <th>400.0</th>
+                <th th:text="${c6}"></th>
             </tr>
             </tbody>
         </table>
@@ -64,7 +64,7 @@
 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="/static/js/ajustes.js"></script>
-<script type="text/javascript" src="/static/js/materialize.min.js"></script>
+<script type="text/javascript" src="/static/js/ajustes.js" th:src="@{js/ajustes.js}"></script>
+<script type="text/javascript" src="/static/js/materialize.min.js" th:src="@{js/materialize.min.js}"></script>
 </body>
 </html>

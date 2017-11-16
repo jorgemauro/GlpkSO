@@ -66,6 +66,7 @@ public class GlpkService {
                 double[] resultados= new double[prob.getNumeroVariaveis()+1];
                     // this.retrieve solution
                     if (this.ret == 0) {
+                        resultados[0]=GLPK.glp_get_obj_val(this.pLinear);
                         for (int i = 1; i <= GLPK.glp_get_num_cols(this.pLinear); i++) {
                             resultados[i]=GLPK.glp_get_col_prim(this.pLinear, i);
 

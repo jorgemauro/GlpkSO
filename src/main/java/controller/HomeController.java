@@ -58,7 +58,7 @@ public class HomeController {
             }else if(i==(2*clientes)+1){
                 limits[count2-1]=-matriz[(2*clientes)+1];
                 count2++;
-            }else if(i>(matriz.length-(clientes+1))&& i!=matriz.length-1){
+            }else if(i>(matriz.length-(clientes+2))&& i!=matriz.length-1){
                 limits[count2-1]=matriz[i];
                 count2++;
             }
@@ -66,8 +66,11 @@ public class HomeController {
         double [] coef= new double[variaveis];
         int count3=0;
 
-        for(int j=0;j<matriz.length-(clientes+1);j++){
-            if(j!=(clientes+1)&&j!=(clientes*j)){
+        for(int j=0;j<matriz.length-(clientes+2);j++){
+            if(j<clientes){
+                coef[count3]=matriz[j];
+                count3++;
+            }else if((j-1)%clientes!=0&&j!=clientes || j==clientes+1){
                 coef[count3]=matriz[j];
                 count3++;
             }
@@ -76,8 +79,12 @@ public class HomeController {
         Prob prob=new Prob(variaveis,nRestrições,matrizRestris,limits,coef);
         GlpkService glpkService = new GlpkService();
         prob=glpkService.serviceProb(prob);
-        System.out.println("test");
-        return new ModelAndView("resultado");
+        ModelAndView modelo=new ModelAndView("resultado");
+        modelo.addObject("fObj",prob.getResultador()[0]);
+        for(int i=1;i<prob.getResultador().length;i++){
+            modelo.addObject("c"+i,prob.getResultador()[i]);
+        }
+        return modelo;
     }
     public static void main(String[] args) throws Exception {
         SpringApplication.run(HomeController.class, args);
