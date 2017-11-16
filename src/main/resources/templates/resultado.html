@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>teste</title>
+    <title>Problema De transporte</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
+
+    <link rel="stylesheet" href="/static/css/ajustes.css"/>
 </head>
 <body>
-cheguei aqui
+<nav>
+    <div class="nav-wrapper blue">
+        <a href="#" class="brand-logo center-align">Resultado</a>
+    </div>
+</nav>
+
+<div class="card">
+    <div class="card-content topo" id="matriz">
+        <table >
+            <thead id="thread">
+            <tr id="first">
+                <th>resultado</th>
+            </tr>
+            </thead>
+
+            <tbody id="matrix">
+            <tr>
+                <th>resultado otimo</th>
+                <th>7800</th>
+            </tr>
+            <tr>
+                <th>caminho1</th>
+                <th>0.0</th>
+            </tr>
+
+            <tr>
+                <th>caminho2</th>
+                <th>200.0</th>
+            </tr>
+
+            <tr>
+                <th>caminho3</th>
+                <th>0.0</th>
+            </tr>
+
+            <tr>
+                <th>caminho4</th>
+                <th>500.0</th>
+            </tr>
+
+            <tr>
+                <th>caminho5</th>
+                <th>0.0</th>
+            </tr>
+            <tr>
+                <th>caminho6</th>
+                <th>400.0</th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/static/js/ajustes.js"></script>
+<script type="text/javascript" src="/static/js/materialize.min.js"></script>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package feature;
 
 import org.gnu.glpk.*;
-import util.GLPKUtil;
 
 public class GlpkService {
         public static void main(String[] args) {
@@ -35,8 +34,8 @@ public class GlpkService {
                     {0,1,0,0,1,0},
                     {0,0,1,0,0,1}
         };
-            double[] limites = {-500,-600,100,500,500};
-            double[] coeficientes = {2,3,4,5,2,7};
+            double[] limites = {-400,-900,500,200,400};
+            double[] coeficientes = {10,5,20,8,12,7};
             prob=new Prob(numeroVariaveis,numeroRestricoes,restricoes,limites,coeficientes);
             try {
                 // Create problem
@@ -58,8 +57,20 @@ public class GlpkService {
                 GLPK.glp_add_rows(pLinear, prob.getNumeroRestricoes());
 
                 // Set row details
-                GLPKUtil.set_lo_restricoes(pLinear, ind, val, prob.getLimites(),prob.getRestricoes(), 1, prob.getNumeroRestricoes(), prob.getNumeroVariaveis());
+                for (int i = 1; i <=  prob.getNumeroRestricoes() ; i++) {
+                    GLPK.glp_set_row_name(pLinear, i, "c" + i);
+                    GLPK.glp_set_row_bnds(pLinear, i, GLPKConstants.GLP_LO,  prob.getLimites()[i-1], 0);
 
+                    for (int j = 1; j <= prob.getNumeroVariaveis(); j++) {
+                        GLPK.intArray_setitem(ind, j, j);
+                    }
+
+                    for (int j = 1; j <= prob.getNumeroVariaveis(); j++) {
+                        GLPK.doubleArray_setitem(val, j, restricoes[i-1][j-1]);
+                    }
+
+                    GLPK.glp_set_mat_row(pLinear, i, prob.getNumeroVariaveis(), ind, val);
+                }
                 // Free memory
                 GLPK.delete_intArray(ind);
                 GLPK.delete_doubleArray(val);
@@ -82,7 +93,7 @@ public class GlpkService {
 
                     // Retrieve solution
                     if (ret == 0) {
-                        GLPKUtil.write_lp_solucao(pLinear,"transportation7.sol");
+                        //pegaResultado
                     } else {
                     System.out.println("O problema não pode ser resolvido");
                 }
