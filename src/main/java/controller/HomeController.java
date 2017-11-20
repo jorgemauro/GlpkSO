@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+
 @Controller
 @EnableAutoConfiguration
 public class HomeController {
@@ -79,11 +81,17 @@ public class HomeController {
         Prob prob=new Prob(variaveis,nRestrições,matrizRestris,limits,coef);
         GlpkService glpkService = new GlpkService();
         prob=glpkService.serviceProb(prob);
-        ModelAndView modelo=new ModelAndView("resultado");
+        ModelAndView modelo=new ModelAndView("resultdinamico");
         modelo.addObject("fObj",prob.getResultador()[0]);
+        double[] p =new double[prob.getResultador().length-1];
+        String[]name= new String[prob.getResultador().length-1];
         for(int i=1;i<prob.getResultador().length;i++){
-            modelo.addObject("c"+i,prob.getResultador()[i]);
+            //modelo.addObject("c"+i,prob.getResultador()[i]);
+            p[i-1]=prob.getResultador()[i];
+            name[i-1]="caminho"+i;
         }
+        modelo.addObject("nomes",name);
+        modelo.addObject("caminhos",p);
         return modelo;
     }
     public static void main(String[] args) throws Exception {

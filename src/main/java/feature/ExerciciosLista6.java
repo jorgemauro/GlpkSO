@@ -6,7 +6,7 @@ import util.GLPKUtil;
 public class ExerciciosLista6 {
     public static void main(String[] args) {
         glp_prob lp;
-        glp_smcp parm;
+        glp_iocp parm;
         SWIGTYPE_p_int ind;
         SWIGTYPE_p_double val;
         int ret;
@@ -60,11 +60,11 @@ public class ExerciciosLista6 {
             }
 
             // Write model to file
-            GLPK.glp_write_lp(lp, null, "3_3.lp");
+            GLPK.glp_write_lp(lp, null, "teste.lp");
             // Solve model
-            parm = new glp_smcp();
-            GLPK.glp_init_smcp(parm);
-            ret = GLPK.glp_simplex(lp, parm);
+            parm = new glp_iocp();
+            GLPK.glp_init_iocp(parm);
+            ret = GLPK.glp_intopt(lp, parm);
 
             // Retrieve solution
             if (ret == 0) {
